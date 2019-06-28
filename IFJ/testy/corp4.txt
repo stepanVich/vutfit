@@ -1,0 +1,29 @@
+// I_ADD
+class Main {
+    static void run () {
+    int a = 1;
+    int b = 2;
+    double c = 1.1;
+    double d = 2.2;
+
+    // s konstantami
+    ifj16.print(a+2);
+    ifj16.print("\n");
+    ifj16.print(1.1+b);
+    ifj16.print("\n");
+    ifj16.print(a+2.2);
+    ifj16.print("\n");
+    ifj16.print(1.1+d);
+    ifj16.print("\n");
+    
+    // jenom promenne
+    ifj16.print(a+b);
+    ifj16.print("\n");
+    ifj16.print(c+b);
+    ifj16.print("\n");
+    ifj16.print(a+d);
+    ifj16.print("\n");
+    ifj16.print(c+d);
+    ifj16.print("\n");
+  }
+}

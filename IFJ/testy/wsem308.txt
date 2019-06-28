@@ -1,0 +1,10 @@
+class Main {
+    static void run () {
+        int a;
+        a = foo (1, 2, 4);
+        ifj16.print (a + "\n");
+    }
+    static int foo(int a, int c, int c) {
+        return a + c + c;
+    }
+}

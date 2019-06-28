@@ -1,0 +1,7 @@
+class Main {
+  static int a = 2;
+  static void run () {
+    5 = a;
+    ifj15.print (a + "\n");
+  }
+}

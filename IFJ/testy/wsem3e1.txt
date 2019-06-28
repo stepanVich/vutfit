@@ -1,0 +1,12 @@
+class Main
+{
+
+	static void run()
+	{
+		int foo;
+	}
+	static double foo()
+	{
+
+	}
+}

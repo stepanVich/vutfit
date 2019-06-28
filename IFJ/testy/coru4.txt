@@ -1,0 +1,11 @@
+class Main {
+    static void run () {
+    
+    String a = "Cau\n";
+    int b;
+    b = ifj16.length(a);
+    
+    ifj16.print(b);
+    
+  }
+}

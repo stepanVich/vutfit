@@ -1,0 +1,16 @@
+class Main {
+    static int a;
+    static void run () {
+        a = Retez.delka();
+        ifj16.print ("delka: " + a + "\n");
+    }
+}
+class Retez {
+    static String a = "Ahoj";
+    static String b = "Nazdar";
+    static int delka () {
+        int pom1; pom1 = ifj16.length (a);
+        int pom2; pom2 = ifj16.length (b);
+        return pom1 + pom2;
+    }
+}

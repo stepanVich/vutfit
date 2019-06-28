@@ -1,0 +1,11 @@
+class Main {
+    static void run () {
+    
+    String a = "Cau ahoj\n";
+    String b;
+    b = ifj16.substr(a, 1, 4);
+    
+    ifj16.print(b);
+    
+  }
+}

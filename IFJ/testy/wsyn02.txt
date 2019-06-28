@@ -1,0 +1,4 @@
+class Main {
+  staic void run () {
+  }
+}

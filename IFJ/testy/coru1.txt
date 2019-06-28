@@ -1,0 +1,10 @@
+class Main {
+    static void run () {
+    
+    int a;
+    a = ifj16.readInt();
+    
+    ifj16.print(a + "\n");
+    
+  }
+}

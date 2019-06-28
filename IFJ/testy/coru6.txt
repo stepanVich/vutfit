@@ -1,0 +1,18 @@
+class Main {
+    static void run () {
+    
+    String a = "Cau";
+    String b = "Ahoj";
+    int c;
+    c = ifj16.compare(a, b);
+    ifj16.print(c + "\n");
+    c = ifj16.compare(a, a);
+    ifj16.print(c + "\n");
+    c = ifj16.compare(b, b);
+    ifj16.print(c + "\n");
+    c = ifj16.compare(b, a);
+    ifj16.print(c + "\n");
+    
+    
+  }
+}

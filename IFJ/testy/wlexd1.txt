@@ -1,0 +1,8 @@
+class Main
+{
+	static int  a.boolean;
+	static void run()
+	{
+		int a.boo
+	}
+}

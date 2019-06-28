@@ -1,0 +1,15 @@
+class Main {
+    static String str1 = "Ahoj";
+    static String str2 = "Zdravim";
+    static String str3 = "Ahoj";
+    static void run () {
+        int ret;
+
+        ret = ifj16.compare (str1, str2);
+        ifj16.print ("test1: " + ret + "\n");
+        ret = ifj16.compare (str2, str1);
+        ifj16.print ("test2: " + ret + "\n");
+        ret = ifj16.compare (str1, str3);
+        ifj16.print ("test3: " + ret + "\n");
+    }
+}

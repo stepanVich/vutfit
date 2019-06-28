@@ -1,0 +1,8 @@
+class Main
+{
+	static void run()
+	{
+		double a;
+		a = (2<3) + 2;
+	}
+}

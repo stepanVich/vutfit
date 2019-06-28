@@ -1,0 +1,11 @@
+class Main {
+  static void run () {
+    Another.foo();
+  }
+}
+
+class Another {
+  static void foo () {
+    ifj16.print ("Another.foo\n");
+    }
+}

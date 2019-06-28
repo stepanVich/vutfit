@@ -1,0 +1,15 @@
+class Main
+{
+	static void run()
+	{
+		String a = "Hello world!";
+		Print.foo(a);
+	}
+}
+class Print
+{
+	static void foo(String par)
+	{
+		ifj16.print(par + "\n");
+	}
+}

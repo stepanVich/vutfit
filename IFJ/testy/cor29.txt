@@ -1,0 +1,11 @@
+class Main {
+    static void run () {
+        int a;
+        double b;
+        String c;
+        a = ifj16.readInt();
+        b = ifj16.readDouble();
+        c = ifj16.readString();
+        ifj16.print (a + " " + b + " " + c + "\n");
+    }
+}

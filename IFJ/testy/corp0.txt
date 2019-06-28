@@ -1,0 +1,12 @@
+// I_PRINT
+// testovani vypisu konstant
+class Main {
+  static void run () {
+    ifj16.print(2);
+    ifj16.print("\n");
+    ifj16.print(5.36);
+    ifj16.print("\n");
+    ifj16.print("AbCd");
+    ifj16.print("\n");
+  }
+}

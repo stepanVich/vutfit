@@ -1,0 +1,17 @@
+class Main {
+    static int i = 99;
+    static void run () {
+        int pom = 1;
+        while (i == 99) {
+            $print_iter (pom);
+            if (pom == 5) {
+                i = 1;
+            } else {
+                pom = pom + 1;
+            }
+        }
+    }
+    static void $print_iter (int a) {
+        ifj16.print (a + ". iterace\n");
+    }
+}

@@ -1,0 +1,7 @@
+class Main {
+    static void run () {
+        ifj16.print ("a," + 5 + "5" + 3.21 + "\nb,");
+        ifj16.print (3 + ".21" + "5" + 5);
+        ifj16.print ("\n");
+    }
+}

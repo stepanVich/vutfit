@@ -1,0 +1,15 @@
+class Main {
+    static int a = 10;
+    static void run () {
+        int a = 2;
+        ifj16.print (a + "\n");
+        a = 20;
+        ifj16.print (a + "\n");
+        Main.a = 30;
+        ifj16.print (a + "\n");
+        foo();
+    }
+    static void foo() {
+        ifj16.print (a + "\n");
+    }
+}

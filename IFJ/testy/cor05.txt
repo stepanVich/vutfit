@@ -1,0 +1,17 @@
+class Main {
+  static int a;
+  static void run () {
+    a = Another.b;
+    ifj16.print ("a: " + a + "\n");
+    int c;
+    c = Another.getVal();
+    ifj16.print ("c: " + c + "\n");
+  }
+}
+
+class Another {
+  static int b = 2;
+  static  int getVal () {
+    return b;
+  }
+}

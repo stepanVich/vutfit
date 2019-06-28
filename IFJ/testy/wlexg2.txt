@@ -1,0 +1,8 @@
+class Main
+{
+	static int while.a;
+	static void run()
+	{
+
+	}
+}

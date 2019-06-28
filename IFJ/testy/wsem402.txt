@@ -1,0 +1,10 @@
+class Main {
+  static double a = 20.2;
+  static void run () {
+    if ((a > 20) == 1) {
+      ifj16.print ("if\n");
+    } else {
+      ifj16.print ("else\n");
+    }
+  }
+}

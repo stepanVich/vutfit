@@ -1,0 +1,8 @@
+class Main
+{
+	static int a.break;
+	static void run()
+	{
+
+	}
+}

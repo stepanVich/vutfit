@@ -1,0 +1,9 @@
+class Main {
+    static int iter = 5;
+    static void run () {
+        while (iter != 0) {
+            ifj16.print (iter + ".iterace\n");
+            iter = iter - 1;
+        }
+    }
+}

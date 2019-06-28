@@ -1,0 +1,11 @@
+class Main {
+    static void run () {
+        ifj16.print ("hello\n");
+    }
+    static int a () {
+        return 3;
+    }
+    static double a () {
+        return 3.1;
+    }
+}

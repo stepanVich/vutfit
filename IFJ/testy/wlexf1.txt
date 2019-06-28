@@ -1,0 +1,8 @@
+class Main
+{
+	static int a.int;
+	static void run()
+	{
+
+	}
+}

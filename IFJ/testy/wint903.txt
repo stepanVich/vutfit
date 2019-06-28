@@ -1,0 +1,11 @@
+class Main
+{
+	static double a;
+	static double b;
+	static void run()
+	{
+		a = 3.01;
+		Main.b = 0.0;
+		double c = a / b;
+	}
+}

@@ -1,0 +1,13 @@
+class Main {
+    static double a = 2.2;
+    static void run () {
+        int a;
+        a = ifj16.find ("Ahoj", "ho");
+        ifj16.print ("run: a = " + a);
+        aa();
+        ifj16.print ("\n");
+    }
+    static void aa () {
+        ifj16.print ("aa: a = " + a);
+    }
+}

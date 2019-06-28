@@ -1,0 +1,18 @@
+// I_DIV
+class Main {
+    static void run () {
+    int a = 1/2;
+    double b;
+    ifj16.print(a);
+    ifj16.print("\n");
+    b = 1.1/2;
+    ifj16.print(b);
+    ifj16.print("\n");
+    b = 1/2.2;
+    ifj16.print(b);
+    ifj16.print("\n");
+    b = 1.1/2.2;
+    ifj16.print(b);
+    ifj16.print("\n");
+  }
+}

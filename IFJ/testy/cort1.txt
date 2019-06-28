@@ -1,0 +1,27 @@
+class Main {
+    static int a = 1;
+    static int b = 2;
+    static double c = 1.1;
+    static double d = 2.2;
+    static void run () {
+    int m = 1;
+    int n = 2;
+    double o = 1.1;
+    double p = 2.2;
+
+    if(1<2) {ifj16.print("a");} else {ifj16.print("b");}
+    if(1.1<2) {ifj16.print("a");} else {ifj16.print("b");}
+    if(1<2.2) {ifj16.print("a");} else {ifj16.print("b");}
+    if(1.1<2.2) {ifj16.print("a");} else {ifj16.print("b");}
+    if(a<b) {ifj16.print("a");} else {ifj16.print("b");}
+    if(c<b) {ifj16.print("a");} else {ifj16.print("b");}
+    if(a<d) {ifj16.print("a");} else {ifj16.print("b");}
+    if(c<d) {ifj16.print("a");} else {ifj16.print("b");}
+    if(m<n) {ifj16.print("a");} else {ifj16.print("b");}
+    if(o<n) {ifj16.print("a");} else {ifj16.print("b");}
+    if(a<p) {ifj16.print("a");} else {ifj16.print("b");}
+    if(o<p) {ifj16.print("a");} else {ifj16.print("b");}
+    ifj16.print("\n");
+    
+  }
+}

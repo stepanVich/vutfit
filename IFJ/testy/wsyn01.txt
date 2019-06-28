@@ -1,0 +1,5 @@
+clss Main {
+  static void run () {
+
+  }
+}

@@ -1,0 +1,11 @@
+class Main {
+    static void run () {
+        String a = "Ahoj";
+        String b = "zzyybbasdfhdasdfas";
+
+        String c; c = ifj16.sort (b);
+        a = ifj16.sort (a);
+
+        ifj16.print ("a: " + a + "\nb: " + b + "\nc: " + c + "\n");
+    }
+}

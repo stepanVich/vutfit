@@ -1,0 +1,13 @@
+// I_PRINT
+// testovani vypisu lokalnich promennych
+class Main {
+  static void run () {
+    int a = 2;
+    double b = 5.36;
+    String nl = "\n";
+    ifj16.print(a);
+    ifj16.print(nl);
+    ifj16.print(b);
+    ifj16.print(nl);
+  }
+}

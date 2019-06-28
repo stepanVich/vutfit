@@ -1,0 +1,8 @@
+class Main
+{
+	static int for.a;
+	static void run()
+	{
+
+	}
+}

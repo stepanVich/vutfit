@@ -1,0 +1,8 @@
+class Main
+{
+	static int false.a;
+	static void run()
+	{
+
+	}
+}

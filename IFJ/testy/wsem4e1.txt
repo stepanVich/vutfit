@@ -1,0 +1,15 @@
+class Main
+{
+	static void run()
+	{
+		if (3+2)
+		{
+
+		}
+		else
+		{
+
+		}
+
+	}
+}

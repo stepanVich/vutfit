@@ -1,0 +1,21 @@
+class Main {
+    static void run () {
+        int a;
+        a = factor (3);
+        ifj16.print ("3! " + a + "\n");
+        a = factor (8);
+        ifj16.print ("8! " + a + "\n");
+    }
+    static int factor (int n) {
+        int vysl;
+        int a;
+        int fact;
+        if (n == 1) {
+            return 1;
+        } else {
+            a = n - 1;
+            vysl = factor (a);
+            return n * vysl;
+        }
+    }
+}

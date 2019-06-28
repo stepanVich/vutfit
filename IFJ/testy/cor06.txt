@@ -1,0 +1,10 @@
+class Main {
+  static int a = 2;
+  static void run () {
+    if (2 == a) {
+      ifj16.print ("true\n");
+    } else {
+      ifj16.print ("false\n");
+    }
+  }
+}

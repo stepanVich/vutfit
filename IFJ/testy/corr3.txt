@@ -1,0 +1,13 @@
+// I_MUL
+class Main {
+    static void run () {
+    ifj16.print(1*2);
+    ifj16.print("\n");
+    ifj16.print(1.1*2);
+    ifj16.print("\n");
+    ifj16.print(1*2.2);
+    ifj16.print("\n");
+    ifj16.print(1.1*2.2);
+    ifj16.print("\n");
+  }
+}

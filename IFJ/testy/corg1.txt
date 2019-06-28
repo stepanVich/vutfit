@@ -1,0 +1,25 @@
+class Main
+{
+	static void run ()
+	{
+		Trida2.rekurze ();
+		ifj16.print ("Uspech\n");
+	}
+}
+
+class Trida1
+{
+	static int counter = 10;
+}
+
+class Trida2
+{
+	static void rekurze()
+	{
+		while (Trida1.counter > 0)
+		{
+			Trida1.counter = Trida1.counter - 1;
+			Trida2.rekurze ();
+		}
+	}
+}

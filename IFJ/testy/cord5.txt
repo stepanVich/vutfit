@@ -1,0 +1,14 @@
+class Main
+{
+	static void run()
+	{
+		Print.foo();
+	}
+}
+class Print
+{
+	static void foo()
+	{
+		ifj16.print("Hello world!\n");
+	}
+}

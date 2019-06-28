@@ -1,0 +1,11 @@
+class Main {
+    static String vstup = "Toto je jedna veta";
+    static void run () {
+        ifj16.print (vstup);
+        String pom1;
+        pom1 = ifj16.substr (vstup, 2, 8);
+        ifj16.print ("\n" + pom1);
+        pom1 = ifj16.substr (vstup, 0, 5);
+        ifj16.print ("\n" + pom1 + "\n");
+    }
+}

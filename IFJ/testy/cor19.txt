@@ -1,0 +1,12 @@
+class Main {
+    static void run () {
+        int i = 5;
+        while (i > 0) {
+            $print_iter (i);
+            i = i - 1;
+        }
+    }
+    static void $print_iter (int i) {
+        ifj16.print (i + ". iterace\n");
+    }
+}

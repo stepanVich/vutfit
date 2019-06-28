@@ -1,0 +1,5 @@
+class Main {
+    static void run () {
+        print ("hello\n");
+    }
+}
