@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Banka</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>
+	    <a href="mailto:xresov00@stud.fit.vutbr.cz">xresov00@tud.fit.vutbr.cz</a> -
+		databázový subsystém, php skripty
+	</dd>
+	<dd>
+	    <a href="mailto:xvichs00@stud.fit.vutbr.cz">xvichs00@stud.fit.vutbr.cz</a> - 
+		php skripty, vzhled (html/css)
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://www.stud.fit.vutbr.cz/~xvichs00">http://www.stud.fit.vutbr.cz/~xvichs00</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>xjirasek01</td><td>1234</td><td>Pracovnik banky</td></tr>
+<tr><td>xnovak03</td><td>1234</td><td>Pracovnik banky</td></tr>
+<tr><td>xholus03</td><td>1234</td><td>Pracovnik banky</td></tr>
+<tr><td>xrychly</td><td>1234</td><td>Pracovnik banky</td></tr>
+<tr><td>xvranesic1</td><td>1234</td><td>Administrator</td></tr>
+</table>
+
+<h2>Implementace</h2>
+<p>ebová aplikácia bola implentovaná pomocou PHP, HTML5, CSS3, MySQL (server Eva). Aplikácia sa spúšťa so skriptom index.php, ktorý ďalej spúšťa ďalšie skripty:</p>
+<table>
+	<tr>
+		<td>index.php</td>
+		<td>Spúšťacia stránka s prihlasovacím formulárom</td>
+	</tr>
+	<tr>
+		<td>login.php</td>
+		<td>Prihlásenie</td>
+	</tr>
+	<tr>
+		<td>logout.php</td>
+		<td>Odhlásenie</td>
+	</tr>
+	<tr>
+		<td>zapomenute.php</td>
+		<td>Skript pre prípad zabudnutého hesla</td>
+	</tr>
+	<tr>
+		<td>db-init.php</td>
+		<td>Inicializácia databázy</td>
+	</tr>
+	<tr>
+		<td>db.sql</td>
+		<td>Databázový súbor</td>
+	</tr>
+	<tr>
+		<td>inter1.php</td>
+		<td>Vnútorné moduly stránok</td>
+	</tr>
+	<tr>
+		<td>includes/header.php</td>
+		<td>Spracovanie loginu, session start</td>
+	</tr>
+	<tr>
+		<td>includes/footer.php</td>
+		<td>Spracovanie odhlásenia</td>
+	</tr>
+	<tr>
+		<td>includes/pracovnik.php</td>
+		<td>Funkcionalita pracovníka a admina. Ich jednotlivé možnosti podľa Use Case diagramu</td>
+	</tr>
+	<tr>
+		<td>css/main.css</td>
+		<td>Grafické spracovanie stránky</td>
+	</tr>
+</table>
+<h2>Instalace</h2>
+<ul>
+<li>Softwarové požiadavky : PHP 5.3+, MySQL 5.1+</li>
+<li>1. Prekopírovať zdrojové súbory na server, na ktorom chceme aby nám to bežalo</li>
+<li>2. Do databázy importovať súbor db.sql</li>
+<li>3. V súbore db-init.php zmeniť pripojenie na databázu, do ktorej ste importovali db.sql</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Neporadilo sa nám implementovať pravidelné výpisy z účtu pretože sme neboli schopný implementovať časovo pravidelné automatické odosielanie mailu bez prístupu k shell operáciám.</p>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+.TH testovac 1 "17 Nov 2018" "1.0" "testovac man page"
+
+.SH NAME
+testovac \- analyzuje zadane sitove uzly a tiskne jejich ztratovost a dalsi statistiky 
+
+.SH SYNOPSIS
+.B sudo ./testovac -h
+.br
+.B sudo ./testovac -l
+.I port
+.br
+.B sudo ./testovac 
+[\fB\-s\fR \fIvelikost_dat\fR]
+[\fB\-t\fR \fIinterval_ztratovost\fR]
+[\fB\-i\fR \fIinterval_test\fR]
+[\fB\-w\fR \fItimeout\fR]
+[\fB\-p\fR \fIport\fR]
+[\fB\-r\fR \fIrtt_threshold\fR]
+[\fB\-u\fR]
+[\fB\-v\fR]
+.IR hostname1 
+.IR hostname2 
+.I ... 
+
+
+.SH DESCRIPTION
+.PP
+Program slouzi k analyze zadanych sitovych uzlu. Odesila pakety v nastavenych intervalech a urcity cas ceka na jejich odpoved. Pokud odpoved nedojde do urciteho casoveho limitu prohlasi paket za ztraceny a tuto informaci si ulozi. Kazdy uzel se zpracovava paralelne ve vlastnim podprocesu a kazdy podproces navic vytvari nekolik vlaken pro odesilani a prijem paketu a take pro vypis statistik o uzlu. Tyto statistiky se pote vypisuji kazdych 300 sekund po spusteni programu.
+
+.PP
+Adresa uzlu mohou byt zadana jako IPv4/IPv6/hosname adresa. Na tuto adresu se pote budou odesilat ICMPv4 zpravy (pro IPv4 adresu), popripade ICMPv6 zpravy (pro IPv6 adresu). Pri nastavenem flagu -u se posilaji UDP pakety na vsechny druhy adres stejne. Na konci ICMP zpravy (soucast UDP zpravy) se posilaji nahodna data, jejichz velikost je urcena parametrem pri startu programu. Program musi byt spoustem pod pravy roota, jelikoz vyuziva RAW sokety.
+
+.PP
+Zdrojovy kod programu je napsan v jazyce C++ a standardu c++11. Je zkompilovan zadanim prikazu make v korenovem adresari.
+
+.SH OPTIONS
+.HP
+.B \-h 
+ Tiskne napovedu.
+.HP
+.B \-l \fIport\fR 
+ Specifikuje port na ktery mame odesilat UDP pakety. Tato volba je uzitecna pouze tehdy kdyz zadame parametr -u.
+.HP
+.B \-s \fIvelikost_dat\fR 
+ Velikost nahodnych dat, ktere odesilame na server. Do teto velikosti se nezapocitavaji hlavicky paketu.
+.HP
+.B \-t \fIinterval_ztratovost\fR 
+ Interval vypisu ztratovosti jednotlivych uzlu. Jednotkou jsou sekundy a vychozi hodnota je 300s.
+.HP
+.B \-i \fIinterval_test\fR 
+ Interval zasilani testovacich paketu. Jednotkou jsou milisekundy a vychozi hodnota je 100ms.
+.HP
+.B \-w \fItimeout\fR 
+ Maximalni doba po kterou cekame na odpoved od odeslaneho paketu. Pote se paket oznaci jako ztraceny. Jednotkou jsou sekundy a vychozi hodnota je 2s.
+.HP
+.B \-p \fIport\fR 
+ Specifikace portu na ktery odesilame UDP pakety. Ve vychozim nastaveni je to port 0.
+.HP
+.B \-r \fIrtt_threshold\fR 
+ Hodnota RTT thresholdu. Jednotkou jsou milisekundy. Pokud nezadame tento parametr k zadne kontrole thresholdu nebude dochazet a budou se vypisovat jen statistiky o ztracenych paketech a prumernych casech prichodu.
+.HP
+.B \-u 
+ Odesilani UDP paketu na misto ICMP zprav.
+.HP
+.B \-v 
+ Verbose mod. Vypisuje informace o prijatych paketech.
+
+.SH EXAMPLES
+.HP
+.PP
+.B sudo ./testovac www.root.cz -v -i 1000
+.PP
+Priklad programu, ktery odesila kazdou sekundu icmp paket na adresu www.root.cz a vypisuje prijate odpovedi diky flagu verbose -v.
+.HP
+.B sudo ./testovac www.root.cz -v -i 500 -w 4
+.PP
+Priklad programu, ktery odesila kazdych 500ms icmp paket na adresu www.root.cz, pricemz na odpoved ceka maximalne 4 sekundy. Flag verbose zajistuje vypis vsech prijatych paketu.
+.PP
+.B sudo ./testovac 127.0.0.1 -u -p 80 -v
+.br
+.B sudo ./testovac -l 80
+.PP
+Zadane dva programy funguji v paru na jednom pocitaci. Prvni odesila udp pakety na port 80, ze ktereho cte udp pakety druhy program a obratem je odesila zpet. Prvni program pak prijate pakety vypisuje.
+.SH ERROR CODES
+0	Vse probehlo v poradku.
+.br
+1	Spatne zadany parametr programu
+.br
+2	Chyba pri alokaci pameti
+.br
+3	Sitova chyba
+.br
+4	Chyba pri vytvareni podprocesu	
+.br
+
+.PP
+	
+.SH AUTHOR
+Stepan Vich - xvichs00@stud.fit.vutbr.cz
+
+

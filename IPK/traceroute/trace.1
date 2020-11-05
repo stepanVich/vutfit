@@ -1,0 +1,91 @@
+.TH trace 1 "20 Apr 2017" "1.0" "trace man page"
+
+.SH NAME
+trace \- analyzuje a tiskne cestu siti od zdroje k zadanemu cili 
+
+.SH SYNOPSIS
+.B trace 
+[\fB\-f\fR \fIfirst_ttl\fR]
+[\fB\-m\fR \fImax_ttl\fR]
+.IR hostname
+
+.SH DESCRIPTION
+.PP
+Program traceroute slouzi k analyze pocitacove site. Vypisuje uzly (resp. smerovace) na ceste paketu od zdroje k zadanemu cili, pokud k nemu vede nejaka cesta a cil existuje. Program bere jako jedinny poviny parametr IPv4/6 adresu cile, popripade domenovy nazev, ktery prelozi na ekvivalentni IP adresu. Pote postupne posila UDP zpravy k cili s nastavenou hodnotou TTL, kterou s kazdou dalsi zpravou inkrementuje. Diky tomu postupne dostava ICMP zpravy od vsech uzlu, pomoci kterych vypisuje o techto uzlech potrebne informace jako je adresa uzlu a cas ktery ubehl od odeslani az po prijem zpravy zpet. 
+.PP
+Program je ukoncen jakmile se dojde k cili (destination port unreachable), dosahne se maximalniho TTL, nebo pokud prijde specificka ICMP zprava oznamujici host/network/protocol unreachable nebo communication administratively prohibited. Na prijem zpravy od uzlu ceka program 2 sekundy, pokud do teto doby neprijde zadna odpoved, postoupi se na odeslani dalsi zpravy s inkrementovanym TTL. Vzdy odesle jen jednu zpravu (sondu) s danym TTL. Delku cekani nelze nijak zmenit. Program take u kazdeho uzlu vypisuje domenove jmeno uzlu, pokud se mu podari ho ziskat. Jmeno ziskava pomoci reverzniho PTR dotazu.
+
+.PP
+Zdrojovy kod programu je napsan v jazyce C++ a standardu c++98. Je zkompilovan zadanim prikazu make.
+
+.SH OPTIONS
+.HP
+.B \-f \fIfirst_ttl\fR
+ Urcuje hodnotu TTL od ktere se zacinaji posilat UDP zpravy. Vychozi hodnota je 1. Argument je volitelny.
+.HP
+.B \-m \fImax_ttl\fR 
+ Posledni hodnota TTL pri ktere se ukonci program. Vychozi hodnota je 30. Argument je volitelny.
+
+.SH EXAMPLES
+.PP
+Toto je standardni vystup programu pro adresu 172.217.23.238:
+
+.PP
+trace  172.217.23.238 
+
+1   bda-boz.fit.vutbr.cz (147.229.176.1)   0.698 ms 
+
+2   pe-ant.net.vutbr.cz (147.229.254.205)   1.030 ms
+
+3   rt-ant.net.vutbr.cz (147.229.253.233)   0.148 ms
+
+4   r98-bm.cesnet.cz (147.229.252.17)   0.676 ms
+
+5   195.113.235.109 (195.113.235.109)   7.738 ms
+
+6   r2-r93.cesnet.cz (195.113.157.70)   4.833 ms
+
+7   108.170.245.49 (108.170.245.49)   4.870 ms
+
+8   108.170.238.155 (108.170.238.155)   4.889 ms
+
+9   prg03s06-in-f238.1e100.net (172.217.23.238)   4.773 ms
+
+.PP
+Toto je ukazka prevodu domenoveho jmena na IPv6 adresu a pruchod siti:
+.PP
+trace www.root.cz
+
+1   bda-boz6.fit.vutbr.cz (2001:67c:1220:8b0::1)   0.570 ms
+
+2   pe-meo.ipv6.net.vutbr.cz (2001:67c:1220:f521::aff:4901)   1.165 ms
+
+3   pe-tech.ipv6.net.vutbr.cz (2001:67c:1220:f734::aff:4a)   1.026 ms
+
+4   pe-kou.ipv6.net.vutbr.cz (2001:67c:1220:f724::aff:4801)   1.084 ms
+
+5   rt-kou.ipv6.net.vutbr.cz (2001:67c:1220:f534::1)   0.188 ms
+
+6   2001:7f8:87::11 (2001:7f8:87::11)   4.761 ms
+
+7   vl1385.cr2.c16.127.cecolo.prg.masterinter.net (2a01:430:ff:1385:1::2)   4.640 ms
+
+8   vl1391.praha-4d-c1.r1-1.dc1.4d.prg.masterinter.net (2a01:430:ff:1391:1::3)   5.190 ms
+
+9   2001:67c:68::76 (2001:67c:68::76)   5.097 ms
+
+.SH ERROR CODES
+.PP
+Program vraci pri uspesnem ukonceni hodnotu 0. Pokud dojde ke spatnemu zadani vstupnich parametru vraci program hodnotu 1. Pokud je spatne vytvoren soket, nebo se nepodarilo pripojit k adrese vraci program hodnotu 2.
+
+.SH BUGS
+
+Program pracuje bez jakychkoliv znamych chyb. Do budoucna je nejvhodnejsi parametrizovat vychozi hodnotu timeoutu a pridat podporu pro ostatni chybove kody ICMP.
+
+.SH NOTES
+
+Je implementovano rozsireni pro preklad DNS.
+
+.SH AUTHOR
+Stepan Vich - xvichs00@stud.fit.vutbr.cz
+

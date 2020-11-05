@@ -1,0 +1,55 @@
+body {
+	background-color: #84ff82;
+	padding: 0;
+	margin: 0;
+	font-family: 'Arial', sans-serif;
+	color: black;
+}
+
+a {
+	color: #51e24f;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: #296f28;
+}
+table {
+	margin-bottom: 30px;
+}
+.main {
+	background-color: white;
+	margin: auto;
+	max-width: 740px;
+	padding: 30px;
+}
+
+/* Hlavni odkaz v hlavicce */
+#main-link {
+	text-decoration: none;
+	color: black;
+}
+
+#dollars {
+	display: inline-block;
+	padding-right: 15px;
+}
+.hodiny {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.footer {
+
+	margin-top: 60px;
+}
+input:required:after {
+	content: "*";
+}

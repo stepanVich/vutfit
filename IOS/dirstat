@@ -1,0 +1,189 @@
+#!/bin/sh
+
+# Setting default values
+ROOT_DIRECTORY=$PWD;
+I_OPT=false;
+I_EREG_IGNORE='^$';
+ZERO_STRING="N/A";
+
+# Parsing options
+while getopts "i:" opt; do
+        case $opt in
+                i)
+                        I_EREG_IGNORE=$OPTARG;
+                        I_OPT=true;
+                        ;;
+        esac;
+done;
+if [ $I_OPT -a $# -ge 3 ];
+then
+	ROOT_DIRECTORY=$3;
+fi;
+if [ $I_OPT = false -a $# -ge 1 ];
+then
+	ROOT_DIRECTORY=$1;
+fi;
+# Check if root directory is directory
+if ! [[ -d $ROOT_DIRECTORY ]]
+then
+	echo "$ROOT_DIRECTORY is not a directory";
+	exit 1;
+fi;
+
+
+if [ ! -z $(echo $ROOT_DIRECTORY | egrep $I_EREG_IGNORE) ]
+then
+	echo "$I_EREG_IGNORE is part of $ROOT_DIRECTORY"
+	exit 1;
+fi;
+
+
+
+# Getting files
+FILES=$(find $ROOT_DIRECTORY -name '*' -type f | egrep -v "$I_EREG_IGNORE" );
+if [ -z "$FILES" ];
+then
+	FILES_COUNT=0;
+else
+	FILES_COUNT=$(echo "$FILES" | wc -l | sed -e 's/^[ \t]*//');
+fi;
+
+# Getting directories
+DIRECTORIES=$(find $ROOT_DIRECTORY -name '*' -type d | egrep -v "$I_EREG_IGNORE");
+DIRECTORIES_COUNT=$(echo "$DIRECTORIES" | wc -l | sed -e 's/^[ \t]*//');
+# Getting files prefixis
+PREFIXIS=$( echo "$FILES" | sed "s/^.*\///g" | sed "s/^\.//g" | sed '/\./!d' | sed 's/^.*\.//g' | sed '/^[[:alnum:]]*$/!d' | sort | uniq);
+
+# Calculate average files in directory
+AVERAGE_FILES=$(expr $FILES_COUNT \/ $DIRECTORIES_COUNT);
+
+# Calculate max depth of subdirectoires structure
+MAX_DEPTH=1;
+set_max_depth () {
+	ITERATE_OVER="${1}"/*;
+	# Check max depth
+	if (( $2 > $MAX_DEPTH ));
+	then
+		MAX_DEPTH=$2;
+	fi;
+
+	# Iteration over files and directories
+	for item in $ITERATE_OVER;	
+	do
+		# Is directory
+		if [ -d "$item" ];
+		then
+			if [ $(echo "$item" | egrep -v $I_EREG_IGNORE ) != "\n" ]
+			then
+				set_max_depth $item `expr $2 + 1`
+			fi;
+		fi;
+	done;
+	return 0;
+};
+set_max_depth $ROOT_DIRECTORY 1;
+print_info () {
+	# Default variables
+	LARGEST_SIZE=0;
+	AVERAGE_FILE_SIZE=0;
+	MEDIAN=0;
+	# Parse prefix
+	PREFIX='*';
+	if [ $# == 1 ]
+	then
+		PREFIX='*.'$1;
+	fi;
+
+	# Select Files
+	SELECTED_FILES=$(find $ROOT_DIRECTORY -type f -name "$PREFIX" | egrep -v $I_EREG_IGNORE );
+	if [ -n "$SELECTED_FILES" ];
+	# If count of selected files is not null then...
+	then
+		# ... Calculating
+		FILES_COUNT=$( echo "$SELECTED_FILES" | wc -l | sed -e 's/^[ \t]*//' );
+		SIZE_LIST=$( echo "$SELECTED_FILES" |  tr "\n" "\0" | xargs -0 ls -l | awk '{print $5}' );
+		# Largest size of files
+		LARGEST_SIZE=$( echo "$SIZE_LIST" | sort -n -r | head -n 1 );
+		FILES_SIZE_COUNT=$( echo "$SIZE_LIST" | awk '{s+=$1} END {print s}');
+
+		# Average file size
+		AVERAGE_FILE_SIZE=$( echo $FILES_SIZE_COUNT/$FILES_COUNT | bc );
+		MEDIAN_SIZE_LIST=$( echo "$SIZE_LIST" | sort -n -r );
+
+		# Median
+		if [ `expr $FILES_COUNT % 2` -eq 0 ]
+		then
+			if [ $FILES_COUNT == 2 ]
+			then
+				NUM1=$( echo "$MEDIAN_SIZE_LIST" | head -n 1 );
+				NUM2=$( echo "$MEDIAN_SIZE_LIST" | tail -n 1 );
+			else
+				NUM1=$( echo "$MEDIAN_SIZE_LIST" | tail -n $( echo $FILES_COUNT/2 | bc ) | head -n 1 );
+				NUM2=$( echo "$MEDIAN_SIZE_LIST" | tail -n $( echo \($FILES_COUNT-2\)/2 | bc ) | head -n 1 );
+			fi;
+			MEDIAN=$( echo \($NUM1+$NUM2\)/2 | bc );
+		fi;
+		if [ `expr $FILES_COUNT % 2` -eq 1 ]
+		then
+			MEDIAN=$( echo "$MEDIAN_SIZE_LIST" | tail -n $( echo \($FILES_COUNT-1\)/2+1 | bc ) | head -n 1 );
+		fi;
+	fi;
+
+	# Printing info
+	if [ $# == 2 ]
+	then
+		if [ $LARGEST_SIZE -eq 0 ];
+		then
+			LARGEST_SIZE=$ZERO_STRING;
+		fi
+		if [ $AVERAGE_FILE_SIZE -eq 0 ];
+		then
+			AVERAGE_FILE_SIZE=$ZERO_STRING;
+		fi
+		if [ $MEDIAN -eq 0 ];
+		then
+			MEDIAN=$ZERO_STRING;
+		fi
+	fi
+
+
+	if [ $# == 1 ]
+	then
+		# Odstraneni pocatecni hvezdy
+		PREFIX=$( echo "$PREFIX" | sed 's/^\*//' );
+
+		echo "  Largest file $PREFIX: $LARGEST_SIZE";
+		echo "  Average file size $PREFIX: $AVERAGE_FILE_SIZE";
+		echo "  File size median $PREFIX: $MEDIAN";		
+	else
+		echo "  Largest file: $LARGEST_SIZE";
+		echo "  Average file size: $AVERAGE_FILE_SIZE";
+		echo "  File size median: $MEDIAN";	
+	fi;
+	return 0;
+};
+# Printing
+echo "Root directory: $ROOT_DIRECTORY";
+echo "Directories: $DIRECTORIES_COUNT";
+echo "Max depth: $MAX_DEPTH";
+echo "Average no. of files: $AVERAGE_FILES";
+	# Print info about all files   
+echo "All files: $FILES_COUNT";
+
+# spoustime se dvemi argumenty -> zero string zapnut u nolovych hodnot, jinak vypnut
+print_info " " $ZERO_STRING;	
+	# Print info about files with selected prefix
+for one_loop in $PREFIXIS;
+do
+	echo "File extensions:" $( echo $PREFIXIS | sed -e 's/ /,/g' )
+	break;
+done
+for prefix in $PREFIXIS;
+do
+	prefixed_files_count=$( echo "$FILES" | sed -n "/\.$prefix\$/p" | wc -l | sed -e 's/^[ \t]*//' );
+	echo "Files .$prefix: $prefixed_files_count";
+	print_info $prefix;	
+done
+
+# Exit code 0
+exit 0;

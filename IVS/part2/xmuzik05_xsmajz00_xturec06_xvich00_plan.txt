@@ -1,0 +1,19 @@
+Termíny:
+3.4. testy
+10.4. knihovna a GUI
+17.4. debugging a mockup nové verze
+24.4. profiling a dokumentace
+
+Rozdìlení úkolù:
+Dominik Tureèek a Štìpán Vích
+- testy
+- GUI
+- mockup
+
+Monika Mužikovská a Kateøina Šmajzrová
+- knihovna
+- debugging
+-profiling
+
+Primárním komunikaèním kanálem je facebooková skupina, která se kontroluje alespoò dvakrát dennì.
+Pro správu verzí používáme GitHub.

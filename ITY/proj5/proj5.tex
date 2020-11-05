@@ -1,0 +1,164 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage{pgf}
+\usetikzlibrary{arrows,automata}
+\usetheme{Rochester}
+
+
+
+
+\title{Konečné automaty}
+\subtitle{Typografie a Publikování}
+\author{Štěpán Vích}
+\institute{Vysoké učení technické v~Brně \\ Fakulta informačních technologií}
+\date{Duben 2018}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Konečný automat}
+
+\begin{itemize}
+    \item Zkratka KA.
+    \item Anglicky finite state machine.
+    \item Teoretický výpočetní model pro studium formálních jazyků.
+    \item Využití při vyhodnocování regulárních výrazů.
+    \item Součást lexikálních analyzátorů.
+    \item Několik dělení: 
+    \begin{itemize}
+        \item deterministický $\backslash$ nedeterministický 
+        \item Mealyho $\backslash$ Mooreův
+        \item úplný KA $\backslash$ DSKA
+    \end{itemize}
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Definice KA}
+
+\begin{block}{Definice KA}
+Konečný automat (KA) je pětice $M = (Q, \Sigma, R, s, F)$, kde
+\begin{itemize}
+    \item $Q$ je konečná množina stavů
+    \item $\Sigma$ je vstupní abeceda
+    \item $R$ je konečná množina pravidel tvaru: $pa \rightarrow q$, kde $p, q \in Q, a \in \Sigma \cup \{\varepsilon\}$
+    \item $s \in Q$ je počáteční stav
+    \item $F \subseteq Q$ je množina je množina koncových stav koncových stavů
+\end{itemize}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Příklady KA}
+Každý konečný automat lze vyjádřit graficky\\[2em]
+
+\begin{columns}
+\column{0.4\textwidth}
+$M = (Q, \Sigma, R, s, F)$,
+kde:
+\begin{itemize}
+    \item $Q = \{s,f,p\}$
+    \item $\Sigma = \{ a, b, c \}$
+    \item $R = \{ sb \rightarrow f, sc \rightarrow p, pa \rightarrow f\}$
+    \item $F = \{f\}$
+\end{itemize}
+
+
+
+\column{0.6\textwidth}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  \tikzstyle{every state}=[fill=blue, text=white]
+
+  \node[initial,state] (A)                    {$s$};
+  \node[state]         (B) [below right of=A]                 {$p$};
+  \node[state,accepting]         (C) [above right of=B]                 {$f$};
+
+  \path (A) edge              node {c} (B)
+            edge              node {b} (C)
+        (B) edge [loop below] node {b} (B)
+            edge              node {a} (C);
+\end{tikzpicture}
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Mooreův automat}
+\begin{columns}
+\column{0.4\textwidth}
+\begin{itemize}
+    \item Na přechodu jen vstupní hodnota.
+    \item Výstupní hodnota zapsána do stavu.
+    \item Změna na vstupu se projeví na výstupu až v~následujícím stavu.
+\end{itemize}
+\column{0.6\textwidth}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  \tikzstyle{every state}=[fill=blue, text=white]
+
+  \node[initial,state] (A)                    {$00/0$};
+  \node[state]         (B) [below right of=A]                 {$10/1$};
+  \node[state]         (C) [above right of=B]                 {$01/0$};
+
+  \path (A) edge              node {c} (B)
+                 edge              node {b} (C)
+        (B)    edge              node {a} (C);
+\end{tikzpicture}
+
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Mealyho automat}
+\begin{columns}
+\column{0.4\textwidth}
+\begin{itemize}
+    \item Na přechodu je vstupní i výstupní hodnota
+    \item Připomíná synchronní komunikaci.
+    \item Výstup nezáleží na současném vstupu
+\end{itemize}
+\column{0.6\textwidth}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick]
+  \tikzstyle{every state}=[fill=blue, text=white]
+
+  \node[initial,state] (A)                                                              {$00$};
+  \node[state]         (B) [below right of=A]                                  {$10$};
+  \node[state]         (C) [above right of=B]                 {$01$};
+
+  \path (A) edge          node {c/0} (B)
+                 edge          node {b/1} (C)
+        (B)    edge          node {a/0} (C);
+\end{tikzpicture}
+
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Reference}
+
+\begin{enumerate}
+    \item IFJ - prezentace a slidy
+    \item \small{https://cs.wikipedia.org/wiki/Kone\%C4\%8Dn\%C3\%BD\_automat}
+    \item \small{https://cs.wikipedia.org/wiki/Moore\%C5\%AFv\_stroj}
+    \item \small{https://cs.wikipedia.org/wiki/Mealyho\_automat}
+\end{enumerate}
+
+\end{frame}
+
+
+\end{document}
+
